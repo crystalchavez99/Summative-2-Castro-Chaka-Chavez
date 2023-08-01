@@ -1,13 +1,14 @@
 package com.company.bookstore.models;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
 public class Book {
     private int id;
     private String isbn;
-    private Date publishDate;
+    private LocalDate publishDate;
     private int authorId;
     private String title;
     private int publisherId;
@@ -29,12 +30,12 @@ public class Book {
         this.isbn = isbn;
     }
 
-    public Date getPublishDate() {
+    public LocalDate getPublishDate() {
         return publishDate;
     }
 
 
-    public void setPublishDate(Date publishDate) {
+    public void setPublishDate(LocalDate publishDate) {
         this.publishDate = publishDate;
     }
 
@@ -82,5 +83,18 @@ public class Book {
     @Override
     public int hashCode() {
         return Objects.hash(id, isbn, publishDate, authorId, title, publisherId, price);
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", isbn='" + isbn + '\'' +
+                ", publishDate=" + publishDate +
+                ", authorId=" + authorId +
+                ", title='" + title + '\'' +
+                ", publisherId=" + publisherId +
+                ", price=" + price +
+                '}';
     }
 }
