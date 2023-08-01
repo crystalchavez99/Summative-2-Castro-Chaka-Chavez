@@ -1,0 +1,15 @@
+type Book {
+    id: Int!,
+    isbn: String!,
+    publishDate: String!,
+    authorId: Int!,
+    title: String!,
+    publisherId: String!,
+    price: Float!
+
+}
+
+type Query {
+    books: [Book]!,
+    findBookByAuthorId(authorId:Int): Book
+}
