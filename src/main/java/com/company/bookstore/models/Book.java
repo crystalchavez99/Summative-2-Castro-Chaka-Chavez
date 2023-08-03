@@ -8,13 +8,13 @@ import java.util.Objects;
 public class Book {
     private String id;
     private String isbn;
-    private LocalDate publishDate;
+    private String publishDate;
     private int authorId;
     private String title;
     private int publisherId;
     private Float price;
 
-    public Book(String id, String isbn, LocalDate publishDate, int authorId, String title, int publisherId, float price) {
+    public Book(String id, String isbn, String publishDate, int authorId, String title, int publisherId, float price) {
         this.id = id;
         this.isbn = isbn;
         this.publishDate = publishDate;
@@ -40,12 +40,12 @@ public class Book {
         this.isbn = isbn;
     }
 
-    public LocalDate getPublishDate() {
+    public String getPublishDate() {
         return publishDate;
     }
 
 
-    public void setPublishDate(LocalDate publishDate) {
+    public void setPublishDate(String publishDate) {
         this.publishDate = publishDate;
     }
 

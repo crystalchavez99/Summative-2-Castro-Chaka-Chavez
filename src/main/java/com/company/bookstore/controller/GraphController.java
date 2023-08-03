@@ -14,8 +14,12 @@ import com.company.bookstore.repository.PublisherRepository;
 import java.time.LocalDate;
 import java.util.List;
 
+
+
 @Controller
 public class GraphController {
+
+
 
     @Autowired
     BookRepository bookRepository;
@@ -34,11 +38,16 @@ public class GraphController {
         return bookRepository.getBookById(id);
     }
 
+//    @QueryMapping
+//    public Book findBookByAuthorId(@Argument String authorId){
+//        return bookRepository.
+//    }
+
     @MutationMapping
     public Book addBook(
             @Argument String id,
             @Argument String isbn,
-            @Argument LocalDate publishDate,
+            @Argument String publishDate,
             @Argument int authorId,
             @Argument String title,
             @Argument int publisherId,
@@ -51,7 +60,7 @@ public class GraphController {
     public Book updateBook(
             @Argument String id,
             @Argument String isbn,
-            @Argument LocalDate publishDate,
+            @Argument String publishDate,
             @Argument int authorId,
             @Argument String title,
             @Argument int publisherId,
