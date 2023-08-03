@@ -9,9 +9,23 @@ type Book {
 
 }
 
+type Publisher {
+    id: String!
+    name: String!
+    street: String!
+    city: String!
+    state: String!
+    postalCode: String!
+    phone: String!
+    email: String!
+    books: [Book]!
+}
+
 type Query {
     books: [Book]!,
     findBookByAuthorId(authorId:Int): Book
+    publishers: [Publisher]!
+    findPublisherById(id: String!): Publisher
 }
 
 type Mutation {
