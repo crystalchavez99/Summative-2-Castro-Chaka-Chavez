@@ -11,6 +11,7 @@ type Book {
 
 type Query {
     books: [Book]!,
+    findBookById(id:Int): Book
     findBookByAuthorId(authorId:Int): Book
 }
 
