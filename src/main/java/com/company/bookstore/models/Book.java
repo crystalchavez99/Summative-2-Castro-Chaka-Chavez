@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.Objects;
 
 public class Book {
-    private int id;
+    private String id;
     private String isbn;
     private LocalDate publishDate;
     private int authorId;
@@ -14,11 +14,21 @@ public class Book {
     private int publisherId;
     private Float price;
 
-    public int getId() {
+    public Book(String id, String isbn, LocalDate publishDate, int authorId, String title, int publisherId, float price) {
+        this.id = id;
+        this.isbn = isbn;
+        this.publishDate = publishDate;
+        this.authorId = authorId;
+        this.title = title;
+        this.publisherId = publisherId;
+        this.price = price;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

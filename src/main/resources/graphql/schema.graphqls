@@ -1,5 +1,5 @@
 type Book {
-    id: Int!,
+    id: String!,
     isbn: String!,
     publishDate: String!,
     authorId: Int!,
@@ -12,4 +12,11 @@ type Book {
 type Query {
     books: [Book]!,
     findBookByAuthorId(authorId:Int): Book
+}
+
+type Mutation {
+    addBook(id: String, isbn: String, publishDate: String, authorId: Int, title: String, publisherId: String, price: Float): Book
+    updateBook(id: String, isbn: String, publishDate: String, authorId: Int, title: String, publisherId: String, price: Float): Book
+    deleteBookById(id: String!): Boolean
+
 }
