@@ -23,6 +23,7 @@ type Publisher {
 
 type Query {
     books: [Book]!,
+    findBookById(id:Int): Book
     findBookByAuthorId(authorId:Int): Book
     publishers: [Publisher]!
     findPublisherById(id: String!): Publisher

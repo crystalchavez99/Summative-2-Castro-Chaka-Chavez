@@ -27,6 +27,10 @@ public class BookRepository {
     // Get all books
     public List<Book> getBooks() {return this.books;}
 
+//    public Book getBookByAuthorId(){
+//
+//    }
+
     // Get book by id
     public Book getBookById(String id){
         List<Book> checkId = this.books;
