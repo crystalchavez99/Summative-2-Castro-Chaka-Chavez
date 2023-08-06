@@ -49,7 +49,7 @@ public class BookController {
 
     @GetMapping("/books/author/{id}")
     public List<Book> getBooksByAuthor(@PathVariable int id) {
-        return bookRepository.findByAuthorId(id);
+        return bookRepository.findBookByAuthorId(id);
     }
 
 

@@ -4,39 +4,39 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "book")
 public class Book implements Serializable {
     @Id
-//    @Column(name = "book_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "book_id")
     private int id;
     private String isbn;
     private String publishDate;
-    @Column(name="author_id")
-    private int authorId;
-
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private Author author;
     private String title;
-    @Column(name="publisher_id")
-    private int publisherId;
+
+    @ManyToOne
+    @JoinColumn(name = "publisher_id")
+    private Publisher publisher;
     private Float price;
 
-//    public Book(String id, String isbn, String publishDate, int authorId, String title, int publisherId, float price) {
-//        this.id = id;
-//        this.isbn = isbn;
-//        this.publishDate = publishDate;
-//        this.authorId = authorId;
-//        this.title = title;
-//        this.publisherId = publisherId;
-//        this.price = price;
-//    }
+    public Book(){};
+
+    public Book(int id, String isbn, String publishDate, Author author, String title, Publisher publisher, float price) {
+        this.id = id;
+        this.isbn = isbn;
+        this.publishDate = publishDate;
+        this.author = author;
+        this.title = title;
+        this.publisher = publisher;
+        this.price = price;
+    }
 
     public int getId() {
         return id;
@@ -63,12 +63,12 @@ public class Book implements Serializable {
         this.publishDate = publishDate;
     }
 
-    public int getAuthorId() {
-        return authorId;
+    public Author getAuthor() {
+        return author;
     }
 
-    public void setAuthorId(int authorId) {
-        this.authorId = authorId;
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 
     public String getTitle() {
@@ -80,12 +80,12 @@ public class Book implements Serializable {
     }
 
 
-    public int getPublisherId() {
-        return publisherId;
+    public Publisher getPublisher() {
+        return publisher;
     }
 
-    public void setPublisherId(int publisherId) {
-        this.publisherId = publisherId;
+    public void setPublisherId(Publisher publisher) {
+        this.publisher = publisher;
     }
 
     public Float getPrice() {
@@ -101,12 +101,12 @@ public class Book implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return id == book.id && authorId == book.authorId && publisherId == book.publisherId && Objects.equals(isbn, book.isbn) && Objects.equals(publishDate, book.publishDate) && Objects.equals(title, book.title) && Objects.equals(price, book.price);
+        return id == book.id && author == book.author && publisher == book.publisher && Objects.equals(isbn, book.isbn) && Objects.equals(publishDate, book.publishDate) && Objects.equals(title, book.title) && Objects.equals(price, book.price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, isbn, publishDate, authorId, title, publisherId, price);
+        return Objects.hash(id, isbn, publishDate, author, title, publisher, price);
     }
 
     @Override
@@ -115,9 +115,9 @@ public class Book implements Serializable {
                 "id=" + id +
                 ", isbn='" + isbn + '\'' +
                 ", publishDate=" + publishDate +
-                ", authorId=" + authorId +
+                ", author=" + author +
                 ", title='" + title + '\'' +
-                ", publisherId=" + publisherId +
+                ", publisher=" + publisher +
                 ", price=" + price +
                 '}';
     }

@@ -6,7 +6,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
@@ -15,14 +17,18 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(BookController.class)
+//@WebMvcTest(BookController.class)
+@SpringBootTest
+@AutoConfigureMockMvc
 public class BookControllerTest {
+
+    @Autowired
+    private MockMvc mockMvc;
 
     @MockBean
     private BookRepository bookRepository;
 
-    @Autowired
-    private MockMvc mockMvc;
+
 
     private Book book;
     ObjectMapper mapper = new ObjectMapper();
@@ -30,11 +36,11 @@ public class BookControllerTest {
     @BeforeEach
     public void setUp() throws Exception{
         book = new Book();
-        book.setAuthorId(1);
+        //book.setAuthorId(1);
         book.setPrice(19.99f);
         book.setIsbn("1357924680");
         book.setTitle("Algorithms");
-        book.setPublisherId(1);
+        //book.setPublisherId(1);
         book.setPublishDate("2023-08-05");
     }
 
