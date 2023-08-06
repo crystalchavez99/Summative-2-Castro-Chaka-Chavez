@@ -10,10 +10,10 @@ import org.springframework.stereotype.Controller;
 
 import com.company.bookstore.models.Publisher;
 import com.company.bookstore.repository.PublisherRepository;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
 import java.util.List;
-
+import java.util.Optional;
 
 
 @Controller
@@ -30,50 +30,55 @@ public class GraphController {
 
     @QueryMapping
     public List<Book> books(){
-        return bookRepository.getBooks();
+        return bookRepository.findAll();
     }
 
     @QueryMapping
-    public Book findBookById(@Argument String id){
-        return bookRepository.getBookById(id);
+    public Book findBookById(@Argument int id) {
+        Optional<Book> returnVal = bookRepository.findById(id);
+        if (returnVal.isPresent()) {
+            return returnVal.get();
+        } else {
+            return null;
+        }
     }
 
-    @QueryMapping
-    public Book findBookByAuthorId(@Argument String authorId){
-        return bookRepository.getBookByAuthorId(authorId);
-    }
+//    @QueryMapping
+//    public Book findBookByAuthorId(@Argument String authorId){
+//        return bookRepository.getBookByAuthorId(authorId);
+//    }
+//
+//    @MutationMapping
+//    public Book addBook(
+//            @Argument String id,
+//            @Argument String isbn,
+//            @Argument String publishDate,
+//            @Argument int authorId,
+//            @Argument String title,
+//            @Argument int publisherId,
+//            @Argument float price
+//            ){
+//        return bookRepository.addBook(id,isbn,publishDate,authorId, title,publisherId,price);
+//    }
 
-    @MutationMapping
-    public Book addBook(
-            @Argument String id,
-            @Argument String isbn,
-            @Argument String publishDate,
-            @Argument int authorId,
-            @Argument String title,
-            @Argument int publisherId,
-            @Argument float price
-            ){
-        return bookRepository.addBook(id,isbn,publishDate,authorId, title,publisherId,price);
-    }
-
-    @MutationMapping
-    public Book updateBook(
-            @Argument String id,
-            @Argument String isbn,
-            @Argument String publishDate,
-            @Argument int authorId,
-            @Argument String title,
-            @Argument int publisherId,
-            @Argument float price
-    ){
-        Book updateBook = new Book(id,isbn,publishDate,authorId, title,publisherId,price);
-        return bookRepository.updateBook(updateBook);
-    }
-
-    @MutationMapping
-    public boolean deleteBookById(@Argument String id){
-        return bookRepository.deleteBookById(id);
-    }
+//    @MutationMapping
+//    public Book updateBook(
+//            @Argument String id,
+//            @Argument String isbn,
+//            @Argument String publishDate,
+//            @Argument int authorId,
+//            @Argument String title,
+//            @Argument int publisherId,
+//            @Argument float price
+//    ){
+//        Book updateBook = new Book(id,isbn,publishDate,authorId, title,publisherId,price);
+//        return bookRepository.updateBook(updateBook);
+//    }
+//
+//    @MutationMapping
+//    public boolean deleteBookById(@Argument String id){
+//        return bookRepository.deleteBookById(id);
+//    }
 
 
 //PublisherController

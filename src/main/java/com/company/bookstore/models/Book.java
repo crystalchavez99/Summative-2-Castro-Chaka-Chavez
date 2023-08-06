@@ -1,36 +1,48 @@
 package com.company.bookstore.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
 
-public class Book {
-    private String id;
+@Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Table(name = "book")
+public class Book implements Serializable {
+    @Id
+//    @Column(name = "book_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String isbn;
     private String publishDate;
+    @Column(name="author_id")
     private int authorId;
+
     private String title;
+    @Column(name="publisher_id")
     private int publisherId;
     private Float price;
 
-    public Book(String id, String isbn, String publishDate, int authorId, String title, int publisherId, float price) {
-        this.id = id;
-        this.isbn = isbn;
-        this.publishDate = publishDate;
-        this.authorId = authorId;
-        this.title = title;
-        this.publisherId = publisherId;
-        this.price = price;
-    }
+//    public Book(String id, String isbn, String publishDate, int authorId, String title, int publisherId, float price) {
+//        this.id = id;
+//        this.isbn = isbn;
+//        this.publishDate = publishDate;
+//        this.authorId = authorId;
+//        this.title = title;
+//        this.publisherId = publisherId;
+//        this.price = price;
+//    }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
