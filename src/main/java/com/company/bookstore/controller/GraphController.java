@@ -38,10 +38,10 @@ public class GraphController {
         return bookRepository.getBookById(id);
     }
 
-//    @QueryMapping
-//    public Book findBookByAuthorId(@Argument String authorId){
-//        return bookRepository.
-//    }
+    @QueryMapping
+    public Book findBookByAuthorId(@Argument String authorId){
+        return bookRepository.getBookByAuthorId(authorId);
+    }
 
     @MutationMapping
     public Book addBook(

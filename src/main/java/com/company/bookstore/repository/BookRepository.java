@@ -27,9 +27,16 @@ public class BookRepository {
     // Get all books
     public List<Book> getBooks() {return this.books;}
 
-//    public Book getBookByAuthorId(){
-//
-//    }
+    public Book getBookByAuthorId(String authorId){
+        List<Book> checkId = this.books;
+        Book foundBook = null;
+        for(Book b : checkId){
+            if(b.getId().equals(authorId)){
+                foundBook = b;
+            }
+        }
+        return foundBook;
+    }
 
     // Get book by id
     public Book getBookById(String id){
