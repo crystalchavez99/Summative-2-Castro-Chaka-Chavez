@@ -1,70 +1,97 @@
 package com.company.bookstore.controller;
 
+
+import com.company.bookstore.models.Author;
 import com.company.bookstore.models.Book;
+import com.company.bookstore.models.Publisher;
+import com.company.bookstore.repository.AuthorRepository;
 import com.company.bookstore.repository.BookRepository;
+import com.company.bookstore.repository.PublisherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
-import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
+import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
 
-import java.time.LocalDate;
 import java.util.List;
-
-
+import java.util.Optional;
 
 @Controller
 public class GraphController {
 
 
-
     @Autowired
     BookRepository bookRepository;
 
-    @QueryMapping
-    public List<Book> books(){
-        return bookRepository.getBooks();
-    }
+    @Autowired
+    PublisherRepository publisherRepository;
+
+    @Autowired
+    AuthorRepository authorRepository;
 
     @QueryMapping
-    public Book findBookById(@Argument String id){
-        return bookRepository.getBookById(id);
+    public List<Publisher> publishers() {
+        return publisherRepository.findAll();
     }
 
-//    @QueryMapping
-//    public Book findBookByAuthorId(@Argument String authorId){
-//        return bookRepository.
-//    }
-
-    @MutationMapping
-    public Book addBook(
-            @Argument String id,
-            @Argument String isbn,
-            @Argument String publishDate,
-            @Argument int authorId,
-            @Argument String title,
-            @Argument int publisherId,
-            @Argument float price
-            ){
-        return bookRepository.addBook(id,isbn,publishDate,authorId, title,publisherId,price);
+    @QueryMapping
+    public List<Book> books() {
+        return bookRepository.findAll();
     }
 
-    @MutationMapping
-    public Book updateBook(
-            @Argument String id,
-            @Argument String isbn,
-            @Argument String publishDate,
-            @Argument int authorId,
-            @Argument String title,
-            @Argument int publisherId,
-            @Argument float price
-    ){
-        Book updateBook = new Book(id,isbn,publishDate,authorId, title,publisherId,price);
-        return bookRepository.updateBook(updateBook);
+    @QueryMapping
+    public List<Author> authors() {
+        return authorRepository.findAll();
     }
 
-    @MutationMapping
-    public boolean deleteBookById(@Argument String id){
-        return bookRepository.deleteBookById(id);
+    @QueryMapping
+    public Publisher findPublisherById(@Argument int id) {
+        Optional<Publisher> returnVal = publisherRepository.findById(id);
+        if (returnVal.isPresent()) {
+            return returnVal.get();
+        } else {
+            return null;
+        }
     }
+
+    @QueryMapping
+    public Author findAuthorById(@Argument int id) {
+        Optional<Author> returnVal = authorRepository.findById(id);
+        if (returnVal.isPresent()) {
+            return returnVal.get();
+        } else {
+            return null;
+        }
+    }
+
+    @QueryMapping
+    public Book findBookById(@Argument int id) {
+        Optional<Book> returnVal = bookRepository.findById(id);
+        if (returnVal.isPresent()) {
+            return returnVal.get();
+        } else {
+            return null;
+        }
+    }
+
+    @SchemaMapping
+    public Publisher publisher(Book book) {
+        Optional<Publisher> returnVal = publisherRepository.findById(book.getPublisherId());
+        if (returnVal.isPresent()) {
+            return returnVal.get();
+        } else {
+            return null;
+        }
+    }
+
+    @SchemaMapping
+    public Author author(Book book) {
+        Optional<Author> returnVal = authorRepository.findById(book.getAuthorId());
+        if (returnVal.isPresent()) {
+            return returnVal.get();
+        } else {
+            return null;
+        }
+    }
+
 }
