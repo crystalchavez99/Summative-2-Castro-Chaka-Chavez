@@ -1,39 +1,25 @@
-type Publisher {
-    id: ID!
-    publisherName: String!
-    street: String!
-    city: String!
-    state: String!
-    postalCode: String!
-    phone: String!
-    email: String!
-    books: [Book]!
-}
-
 type Book {
+<<<<<<< HEAD
     id: ID!
     isbn: String!
     publishDate: String!
     author: Author
     title: String!
     publisher: Publisher
+=======
+    id: String!,
+    isbn: String!,
+    publishDate: String!,
+    authorId: Int!,
+    title: String!,
+    publisherId: Int!,
+>>>>>>> parent of 151d277 (new format)
     price: Float!
-}
 
-type Author {
-    id: ID!
-    books: [Book]!
-    firstName: String!
-    lastName: String!
-    street: String!
-    city: String!
-    state: String!
-    postalCode: String!
-    phone: String!
-    email: String!
 }
 
 type Query {
+<<<<<<< HEAD
     publisher: [Publisher]
     books: [Book]
     authors: [Author]
@@ -41,3 +27,16 @@ type Query {
     findAuthorById(id: ID!):Author
     findBookById(id: ID!):Book
 }
+=======
+    books: [Book]!,
+    findBookById(id:Int): Book
+    findBookByAuthorId(authorId:Int): Book
+}
+
+type Mutation {
+    addBook(id: String, isbn: String, publishDate: String, authorId: Int, title: String, publisherId: Int, price: Float): Book
+    updateBook(id: String, isbn: String, publishDate: String, authorId: Int, title: String, publisherId: Int, price: Float): Book
+    deleteBookById(id: String!): Boolean
+
+}
+>>>>>>> parent of 151d277 (new format)

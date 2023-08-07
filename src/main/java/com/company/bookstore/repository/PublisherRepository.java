@@ -1,5 +1,6 @@
 package com.company.bookstore.repository;
 
+<<<<<<< HEAD
 import com.company.bookstore.models.Publisher;
 import org.springframework.stereotype.Component;
 
@@ -89,4 +90,7 @@ public class PublisherRepository {
     }
 
     
+=======
+public class PublisherRepository {
+>>>>>>> parent of 151d277 (new format)
 }

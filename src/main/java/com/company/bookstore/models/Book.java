@@ -1,5 +1,6 @@
 package com.company.bookstore.models;
 
+<<<<<<< HEAD
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -37,12 +38,37 @@ public class Book implements Serializable {
         this.publisher = publisher;
         this.price = price;
     }
+=======
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.Objects;
 
-    public int getId() {
+public class Book {
+    private String id;
+    private String isbn;
+    private String publishDate;
+    private int authorId;
+    private String title;
+    private int publisherId;
+    private Float price;
+>>>>>>> parent of 151d277 (new format)
+
+    public Book(String id, String isbn, String publishDate, int authorId, String title, int publisherId, float price) {
+        this.id = id;
+        this.isbn = isbn;
+        this.publishDate = publishDate;
+        this.authorId = authorId;
+        this.title = title;
+        this.publisherId = publisherId;
+        this.price = price;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -80,8 +106,13 @@ public class Book implements Serializable {
     }
 
 
+<<<<<<< HEAD
     public Publisher getPublisher() {
         return publisher;
+=======
+    public int getPublisherId() {
+        return publisherId;
+>>>>>>> parent of 151d277 (new format)
     }
 
     public void setPublisherId(Publisher publisher) {

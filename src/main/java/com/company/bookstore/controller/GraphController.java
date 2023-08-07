@@ -8,12 +8,17 @@ import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
+<<<<<<< HEAD
 import com.company.bookstore.models.Publisher;
 import com.company.bookstore.repository.PublisherRepository;
 import org.springframework.web.bind.annotation.RestController;
 
+=======
+import java.time.LocalDate;
+>>>>>>> parent of 151d277 (new format)
 import java.util.List;
-import java.util.Optional;
+
+
 
 
 @Controller
@@ -24,6 +29,7 @@ public class GraphController {
     @Autowired
     BookRepository bookRepository;
 
+<<<<<<< HEAD
     @Autowired
     PublisherRepository publisherRepository;
 
@@ -141,6 +147,54 @@ public class GraphController {
     }
 
 
+=======
+    @QueryMapping
+    public List<Book> books(){
+        return bookRepository.getBooks();
+    }
+
+    @QueryMapping
+    public Book findBookById(@Argument String id){
+        return bookRepository.getBookById(id);
+    }
+
+//    @QueryMapping
+//    public Book findBookByAuthorId(@Argument String authorId){
+//        return bookRepository.
+//    }
+
+    @MutationMapping
+    public Book addBook(
+            @Argument String id,
+            @Argument String isbn,
+            @Argument String publishDate,
+            @Argument int authorId,
+            @Argument String title,
+            @Argument int publisherId,
+            @Argument float price
+            ){
+        return bookRepository.addBook(id,isbn,publishDate,authorId, title,publisherId,price);
+    }
+
+    @MutationMapping
+    public Book updateBook(
+            @Argument String id,
+            @Argument String isbn,
+            @Argument String publishDate,
+            @Argument int authorId,
+            @Argument String title,
+            @Argument int publisherId,
+            @Argument float price
+    ){
+        Book updateBook = new Book(id,isbn,publishDate,authorId, title,publisherId,price);
+        return bookRepository.updateBook(updateBook);
+    }
+
+    @MutationMapping
+    public boolean deleteBookById(@Argument String id){
+        return bookRepository.deleteBookById(id);
+    }
+>>>>>>> parent of 151d277 (new format)
 }
 
 
